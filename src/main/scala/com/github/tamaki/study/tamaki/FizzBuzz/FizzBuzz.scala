@@ -20,6 +20,14 @@ object FizzBuzz {
     //その４
     fizzbuzzList((1 to 100)).mkString(",")
 
+    //その５
+    val sum = (1 to 100)
+      .map(fizzbuzz)
+      .withFilter(_.matches("""\d+"""))
+      .map(_.toInt)
+      .sum
+
+    println(sum)
 
   }
 
@@ -34,10 +42,12 @@ object FizzBuzz {
 
 
   private def fizzbuzz(in:Int): String = {
-    case i:Int if (i % 15 == 0) => "FizzBuzz"
-    case i:Int if (i % 3 == 0) => "Fizz"
-    case i:Int if (i % 5 == 0) => "Buzz"
-    case i:Int => i.toString
+    in match {
+      case i:Int if (i % 15 == 0) => "FizzBuzz"
+      case i:Int if (i % 3 == 0) => "Fizz"
+      case i:Int if (i % 5 == 0) => "Buzz"
+      case i:Int => i.toString
+    }
   }
 
 }
