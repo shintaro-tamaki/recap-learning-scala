@@ -29,8 +29,8 @@ trait NNP10 {
   @tailrec
   final def penultimate2(list: List[Int]): Int = {
     list match {
-      case head :: tail if tail.length > 2 => penultimate2(tail)
       case head :: tail if tail.length == 2 => tail.head
+      case head :: tail if tail.length > 2 => penultimate2(tail)
       case _ => throw new IllegalArgumentException
     }
   }
