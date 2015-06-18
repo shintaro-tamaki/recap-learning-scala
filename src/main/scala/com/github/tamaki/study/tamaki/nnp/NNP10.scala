@@ -40,11 +40,12 @@ trait NNP10 {
     list(n)
   }
 
+  //間違ってるっぽい
   @tailrec
   final def nth2(n: Int, list: List[Int]): Int = {
     list match {
-      case head :: tail if (tail.length + 1) == n => head
-      case head :: tail if (tail.length + 1) > n => nth2(n, tail)
+      case head :: tail :: Nil => tail
+      case head :: tail :: third => nth2(n, tail :: third)
       case _ => throw new IllegalArgumentException
     }
   }
@@ -86,6 +87,11 @@ trait NNP10 {
   def isPalindrome(list: List[Int]): Boolean = {
     list == list.reverse
   }
+
+  def isPalindrome2(list: List[Int]): Boolean = {
+    list == list.reverse
+  }
+
 
   def flatten(nested: List[Any]): List[Any] = {
     ???
