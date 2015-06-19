@@ -28,7 +28,8 @@ class NNP10Spec extends FunSpec with Matchers with NNP10 {
     // P03 (*) Find the Kth element of a list.
     describe("P03") {
       it("Find the Kth element of a list.") {
-        nth(2, List(1, 1, 2, 3, 5, 8)) should be (2)
+        nth(2, List(1, 1, 2, 3, 5, 8)) should be(2)
+      }
       it("Find the Kth element of a list.2") {
         nth2(2, List(1, 1, 2, 3, 5, 8)) should be(2)
       }
@@ -54,7 +55,6 @@ class NNP10Spec extends FunSpec with Matchers with NNP10 {
     describe("P06") {
       it("Find out whether a list is a palindrome.") {
         isPalindrome(List(1, 2, 3, 2, 1)) should be (right = true)
-        isPalindrome2(List(1, 2, 3, 2, 1)) should be (right = true)
       }
     }
 

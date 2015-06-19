@@ -1,7 +1,5 @@
 package com.github.tamaki.study.tamaki.nnp
 
-import scala.annotation.tailrec
-
 /**
  * Created by tamaki on 2015/02/08.
  */
@@ -12,11 +10,11 @@ trait NNP10 {
     list.last
   }
 
-  @tailrec
+  @scala.annotation.tailrec
   final def last2(list: List[Int]): Int = {
     list match {
-      case head :: Nil => head
-      case head :: tail => last2(tail)
+      case x :: Nil => x
+      case x1 :: xs => last2(xs)
       case _ => throw new IllegalArgumentException
     }
   }
@@ -26,12 +24,13 @@ trait NNP10 {
     list.init.last
   }
 
-  @tailrec
+  @scala.annotation.tailrec
   final def penultimate2(list: List[Int]): Int = {
     list match {
-      case head :: tail if tail.length == 2 => tail.head
-      case head :: tail if tail.length > 2 => penultimate2(tail)
-      case _ => throw new IllegalArgumentException
+      case Nil => throw new NoSuchElementException
+      case x :: Nil => throw new NoSuchElementException
+      case x1 :: x2 :: Nil => x1
+      case x :: xs => penultimate2(xs)
     }
   }
 
@@ -40,12 +39,11 @@ trait NNP10 {
     list(n)
   }
 
-  //間違ってるっぽい
-  @tailrec
+  @scala.annotation.tailrec
   final def nth2(n: Int, list: List[Int]): Int = {
-    list match {
-      case head :: tail :: Nil => tail
-      case head :: tail :: third => nth2(n, tail :: third)
+    n match {
+      case _ if (n == 0) => list.head
+      case _ if (n > 0) => nth2(n - 1, list.tail)
       case _ => throw new IllegalArgumentException
     }
   }
@@ -55,7 +53,7 @@ trait NNP10 {
   }
 
   def length2(list: List[Int]): Int = {
-    @tailrec
+    @scala.annotation.tailrec
     def length0(acc: Int, list: List[Int]): Int = {
       list match {
         case head :: Nil => acc + 1
@@ -72,7 +70,7 @@ trait NNP10 {
   }
 
   def reverse2(list: List[Int]): List[Int] = {
-    @tailrec
+    @scala.annotation.tailrec
     def reverse0(acc: List[Int], list: List[Int]): List[Int] = {
       list match {
         case head :: Nil => head :: acc
@@ -88,25 +86,51 @@ trait NNP10 {
     list == list.reverse
   }
 
-  def isPalindrome2(list: List[Int]): Boolean = {
-    list == list.reverse
-  }
-
 
   def flatten(nested: List[Any]): List[Any] = {
-    ???
+    @scala.annotation.tailrec
+    def flatten0(acc: List[Any], list: List[Any]): List[Any] = {
+      list match {
+        case Nil => acc.reverse
+        case (x: List[_]) :: xs => flatten0(acc, x ::: xs)
+        case (x: Any) :: xs => flatten0(x :: acc, xs)
+        case _ => throw new IllegalArgumentException
+      }
+    }
+    flatten0(List.empty[Any], nested)
   }
 
   def compress(list: List[Symbol]): List[Symbol] = {
-    ???
+    @scala.annotation.tailrec
+    def compress0(acc: List[Symbol], ls: List[Symbol]): List[Symbol] = {
+      ls match {
+        case Nil => acc.reverse
+        case x :: xs => compress0(x :: acc, xs.dropWhile(_ == x))
+      }
+    }
+    compress0(List.empty[Symbol], list)
   }
 
   def pack(list: List[Symbol]): List[List[Symbol]] = {
-    ???
+    @scala.annotation.tailrec
+    def pack0(acc: List[List[Symbol]], ls: List[Symbol]): List[List[Symbol]] = {
+      ls match {
+        case Nil => acc.reverse
+        case x :: xs => pack0((x :: xs).takeWhile(_ == x) :: acc, xs.dropWhile(_ == x))
+      }
+    }
+    pack0(List.empty[List[Symbol]], list)
   }
 
   def encode(list: List[Symbol]): List[(Int, Symbol)] = {
-    ???
+    @scala.annotation.tailrec
+    def encode0(acc: List[(Int, Symbol)], ls: List[Symbol]): List[(Int, Symbol)] = {
+      ls match {
+        case Nil => acc.reverse
+        case x :: xs => encode0(((x :: xs).prefixLength(_ == x), x) :: acc, xs.dropWhile(_ == x))
+      }
+    }
+    encode0(List.empty[(Int, Symbol)], list)
   }
 
 }
