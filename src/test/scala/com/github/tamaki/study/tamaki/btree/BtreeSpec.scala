@@ -13,9 +13,11 @@ class BTreeSpec extends FunSpec with Matchers {
       val bTree2 = BTree(Branch(Leaf(1), 2, Leaf(3)))
       val bTree3 = BTree(Branch(Branch(Leaf(1), 2, Leaf(3)), 4, Branch(Leaf(5), 6, Leaf(7))))
 
+      println("Btree")
       println(bTree1)
       println(bTree2)
       println(bTree3)
+      println("")
 
       it("should compute size of BTree") {
         bTree1.size should be (1)
@@ -46,6 +48,18 @@ class BTreeSpec extends FunSpec with Matchers {
         bTree2.avg should be (2.toDouble)
         bTree3.avg should be (4.toDouble)
       }
+
+      it("should find value of BTree") {
+        println("")
+        println(bTree1.find(1))
+        println(bTree2.find(2))
+        println(bTree2.find(3))
+        println(bTree3.find(4))
+        println(bTree3.find(6))
+        println(bTree3.find(7))
+      }
+
+
       //
 //      it("should create BTree from list") {
 //        BTree(List(1)) should be (bTree1)

@@ -87,4 +87,17 @@ case class BTree(node: Node) {
  * コンパニオンオブジェクト
  */
 object BTree {
+  def apply(ls: List[Int]): BTree = BTree(toNode(ls))
+
+  // これは末尾再帰でないのだよなぁ
+  def toNode(values: List[Int]): Node = {
+    val ls = values.sorted
+
+    if(ls.size == 1) {
+      Leaf(ls.head)
+    } else {
+      val (left, mid :: right) = values.splitAt(ls.size / 2)
+      Branch(toNode(left), mid, toNode(right))
+    }
+  }
 }
