@@ -28,7 +28,9 @@ shellPrompt := { state =>
 
 libraryDependencies ++= {
   Seq(
-   "org.scalatest"  % "scalatest_2.11" % "2.2.1" % "test"
+    "net.databinder.dispatch" %% "dispatch-core" % "0.11.2",
+    "joda-time" % "joda-time" % "2.8.1",
+    "org.scalatest"  % "scalatest_2.11" % "2.2.1" % "test"
   )
 }
 
