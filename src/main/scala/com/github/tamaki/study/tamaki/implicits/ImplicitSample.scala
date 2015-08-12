@@ -1,4 +1,4 @@
-package com.github.tamaki.study.implicits
+package com.github.tamaki.study.tamaki.implicits
 
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat

@@ -1,4 +1,4 @@
-package com.github.tamaki.study.rational
+package com.github.tamaki.study.tamaki.rational
 
 /**
  * Created by shintaro.tamaki on 2015/07/07.

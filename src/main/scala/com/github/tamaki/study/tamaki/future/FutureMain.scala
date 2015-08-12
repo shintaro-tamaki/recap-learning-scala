@@ -1,4 +1,4 @@
-package com.github.tamaki.study.future
+package com.github.tamaki.study.tamaki.future
 
 import java.util.concurrent.Executors
 
